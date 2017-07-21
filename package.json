@@ -1,0 +1,45 @@
+{
+  "name": "twilio-google-cloud-functions-burner",
+  "version": "1.0.0",
+  "description": "A project to create a burner phone number using Twilio and Google Cloud Functions",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "gcloud components update && gcloud components install beta",
+    "create-bucket": "gsutil mb gs://[YOUR_STAGING_BUCKET_NAME]",
+    "pretest": "functions start && functions deploy forwardCall --trigger-http",
+    "test": "functions call forwardCall --data='{\"From\":\"1234567890\"}'",
+    "posttest": "functions logs read && functions stop",
+    "e2etest": "gcloud beta functions call forwardCall --data '{\"From\":\"1234567890\"}'",
+    "deploy": "gcloud beta functions deploy forwardSMS forwardCall --stage-bucket [YOUR_STAGING_BUCKET_NAME] --trigger-http",
+    "delete": "gcloud beta functions delete forwardSMS && gcloud beta functions delete forwardCall"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AppOrchestra/twilio-google-cloud-functions-burner.git"
+  },
+  "keywords": [
+    "twilio",
+    "google",
+    "cloud",
+    "functions",
+    "node",
+    "nodejs",
+    "lambada",
+    "google",
+    "cloud",
+    "platform",
+    "sms",
+    "voice",
+    "mobile",
+    "phone"
+  ],
+  "author": "Daniel Campagnoli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AppOrchestra/twilio-google-cloud-functions-burner/issues"
+  },
+  "homepage": "https://github.com/AppOrchestra/twilio-google-cloud-functions-burner#readme",
+  "dependencies": {
+    "twilio": "^3.5.0"
+  }
+}
